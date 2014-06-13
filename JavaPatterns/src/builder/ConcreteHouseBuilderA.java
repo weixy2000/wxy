@@ -1,7 +1,7 @@
 package builder;
 
 
-public class ConcreteHouseBuilderA  extends HouseBuilder{
+public class ConcreteHouseBuilderA extends HouseBuilder{
     private House house;  
     public ConcreteHouseBuilderA() {
         house = new House();
