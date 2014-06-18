@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<fonts>
+		<font metrics-file="@@@@@@@@@@fonts/simsun.xml"
+			embed-file="@@@@@@@@@@fonts/simsun.ttc" kerning="yes">
+			<font-triplet name="SimSun" style="normal" weight="normal" />
+			<font-triplet name="SimSun" style="normal" weight="bold" />
+			<font-triplet name="SimSun" style="italic" weight="normal" />
+			<font-triplet name="SimSun" style="italic" weight="bold" />
+		</font>
+		<font metrics-file="@@@@@@@@@@fonts/simhei.xml"
+			embed-file="@@@@@@@@@@fonts/simhei.ttf" kerning="yes">
+			<font-triplet name="SimHei" style="normal" weight="normal" />
+			<font-triplet name="SimHei" style="normal" weight="bold" />
+			<font-triplet name="SimHei" style="italic" weight="normal" />
+			<font-triplet name="SimHei" style="italic" weight="bold" />
+		</font>
+	</fonts>
+</configuration>
