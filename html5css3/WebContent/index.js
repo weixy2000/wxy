@@ -52,12 +52,27 @@ function IndexCanvas() {
 	 * 在画布中添加图片 
 	 */
 	this.paintImage = function() {
-		var image = new Image();
-		image.src = './sources/imgs/love.jpg';
-		//image.width = 960;
-		//image.height = 500;
-		this.myCanvas.drawImage(image, 0, 0);
+		var _this = this;
+		this.preImage('./sources/imgs/love.jpg',function(){
+			_this.myCanvas.drawImage(this, 0, 0);
+	    });
 	}
+	/**
+	 * 图片预处理
+	 */
+	this.preImage = function (url,callback){  
+	     var img = new Image(); //创建一个Image对象，实现图片的预下载  
+	     img.src = url;  
+	     
+	    if (img.complete) { // 如果图片已经存在于浏览器缓存，直接调用回调函数  
+	         callback.call(img);  
+	        return; // 直接返回，不用再处理onload事件  
+	     }  
+	  
+	     img.onload = function () { //图片下载完毕时异步调用callback函数。  
+	         callback.call(img);//将回调函数的this替换为Image对象  
+	     };  
+	}  
 }
 
 // page onload
