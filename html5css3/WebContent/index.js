@@ -72,7 +72,16 @@ function IndexCanvas() {
 	     img.onload = function () { //图片下载完毕时异步调用callback函数。  
 	         callback.call(img);//将回调函数的this替换为Image对象  
 	     };  
-	}  
+	}
+	/**
+	 * 画苹果
+	 */
+	this.paintApple = function() {
+		this.myCanvas.beginPath();//开始路线
+		this.myCanvas.fillStyle = 'red';//设置颜色
+		this.myCanvas.arc(100, 75, 50, 0, 2 * Math.PI);//先画圆
+		this.myCanvas.fill();//填充
+	}
 }
 
 // page onload
@@ -83,5 +92,6 @@ $(function() {
 //	canvas.paintTriangle();
 //	canvas.paintCircle();
 //	canvas.paintGradient();
-	canvas.paintImage();
+//	canvas.paintImage();
+	canvas.paintApple();
 })
