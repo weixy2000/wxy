@@ -77,14 +77,14 @@ function IndexCanvas() {
 	 * 画苹果
 	 */
 	this.paintApple = function() {
-		this.myCanvas.translate(100, 100);
+		this.myCanvas.translate(100, 100);// 将0,0位置移到100,100这里
 		
 		// 圆心1x，圆心1y，圆1半径，圆心2x，圆心2y，圆2半径
-		var grad = this.myCanvas.createRadialGradient(40, 40, 2, 40, 40, 40);//创建放射渐变
+		var grad = this.myCanvas.createRadialGradient(35, 45, 2, 35, 45, 25);//创建放射渐变
 		grad.addColorStop(0, 'white');//从白
-		grad.addColorStop(1, 'red');//到红
-		this.myCanvas.fillStyle = grad;//设置填充渐变
+		grad.addColorStop(1, '#E01B13');//到红
 		
+		// 画苹果的外层
 		this.myCanvas.beginPath();//起始一条路径，或重置当前路径
 		this.myCanvas.fillStyle = grad;//设置颜色
 		// 圆心x，圆心y，半径r，起始，画圆周，正向或反向画
@@ -92,17 +92,24 @@ function IndexCanvas() {
 		this.myCanvas.closePath();
 		this.myCanvas.fill();
 		
-		// 圆心1x，圆心1y，圆1半径，圆心2x，圆心2y，圆2半径
-//		var grad = this.myCanvas.createRadialGradient(50, 0, 20, 50, 0, 60);//创建放射渐变
-//		grad.addColorStop(0, 'white');//从白
-//		grad.addColorStop(1, 'red');//到红
-//		this.myCanvas.fillStyle = grad;//设置填充渐变
+		// 画苹果的心，红色圆环遮盖黑色圆环的结果
+		this.myCanvas.beginPath();//起始一条路径，或重置当前路径
+		this.myCanvas.lineWidth=5;
+		this.myCanvas.strokeStyle='#AD3C2A';
+		this.myCanvas.arc(50,5,20,0.3*Math.PI,0.7*Math.PI);//再画圆
+		this.myCanvas.stroke();
 		
+		this.myCanvas.beginPath();//起始一条路径，或重置当前路径
+		this.myCanvas.lineWidth=5;
+		this.myCanvas.strokeStyle='#E01B13';
+		this.myCanvas.arc(50,-6,27,0.3*Math.PI,0.7*Math.PI);//再画圆
+		this.myCanvas.stroke();
 		
-//		this.myCanvas.beginPath();//起始一条路径，或重置当前路径
-//		this.myCanvas.arc(50,0,30,0.1*Math.PI,0.9*Math.PI);//再画圆
-//		this.myCanvas.stroke();
-		
+		// 画苹果的把子
+		this.myCanvas.beginPath();//起始一条路径，或重置当前路径
+		this.myCanvas.strokeStyle='#D1742F';
+		this.myCanvas.arc(110,24,60,1*Math.PI,1.4*Math.PI);
+		this.myCanvas.stroke();
 		
 //		this.myCanvas.beginPath();//起始一条路径，或重置当前路径
 //		this.myCanvas.arc(50,10,28,0.6*Math.PI,0.4*Math.PI,true);//接着画圆
