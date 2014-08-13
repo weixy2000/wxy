@@ -34,7 +34,7 @@ function IndexCanvas() {
 	this.paintCircle = function() {
 		this.myCanvas.fillStyle = '#FF0000';
 		this.myCanvas.beginPath();
-		this.myCanvas.arc(70, 18, 15, 0, Math.PI*2, true);
+		this.myCanvas.arc(70, 18, 15, 0, Math.PI * 2, true);// 画圆
 		this.myCanvas.closePath();
 		this.myCanvas.fill();
 	}
@@ -53,34 +53,62 @@ function IndexCanvas() {
 	 */
 	this.paintImage = function() {
 		var _this = this;
-		this.preImage('./sources/imgs/love.jpg',function(){
+		this.preImage('./sources/imgs/love.jpg', function() {
 			_this.myCanvas.drawImage(this, 0, 0);
-	    });
+		});
 	}
 	/**
 	 * 图片预处理
 	 */
-	this.preImage = function (url,callback){  
-	     var img = new Image(); //创建一个Image对象，实现图片的预下载  
-	     img.src = url;  
-	     
-	    if (img.complete) { // 如果图片已经存在于浏览器缓存，直接调用回调函数  
-	         callback.call(img);  
-	        return; // 直接返回，不用再处理onload事件  
-	     }  
-	  
-	     img.onload = function () { //图片下载完毕时异步调用callback函数。  
-	         callback.call(img);//将回调函数的this替换为Image对象  
-	     };  
+	this.preImage = function(url, callback) {
+		var img = new Image(); //创建一个Image对象，实现图片的预下载  
+		img.src = url;
+
+		if (img.complete) { // 如果图片已经存在于浏览器缓存，直接调用回调函数  
+			callback.call(img);
+			return; // 直接返回，不用再处理onload事件  
+		}
+
+		img.onload = function() { //图片下载完毕时异步调用callback函数。  
+			callback.call(img);//将回调函数的this替换为Image对象  
+		};
 	}
 	/**
 	 * 画苹果
 	 */
 	this.paintApple = function() {
-		this.myCanvas.beginPath();//开始路线
-		this.myCanvas.fillStyle = 'red';//设置颜色
-		this.myCanvas.arc(100, 75, 50, 0, 2 * Math.PI);//先画圆
-		this.myCanvas.fill();//填充
+		this.myCanvas.translate(100, 100);
+		
+		// 圆心1x，圆心1y，圆1半径，圆心2x，圆心2y，圆2半径
+		var grad = this.myCanvas.createRadialGradient(40, 40, 2, 40, 40, 40);//创建放射渐变
+		grad.addColorStop(0, 'white');//从白
+		grad.addColorStop(1, 'red');//到红
+		this.myCanvas.fillStyle = grad;//设置填充渐变
+		
+		this.myCanvas.beginPath();//起始一条路径，或重置当前路径
+		this.myCanvas.fillStyle = grad;//设置颜色
+		// 圆心x，圆心y，半径r，起始，画圆周，正向或反向画
+		this.myCanvas.arc(50,50,50,-0.3*Math.PI,1.3* Math.PI);//先画圆
+		this.myCanvas.closePath();
+		this.myCanvas.fill();
+		
+		// 圆心1x，圆心1y，圆1半径，圆心2x，圆心2y，圆2半径
+//		var grad = this.myCanvas.createRadialGradient(50, 0, 20, 50, 0, 60);//创建放射渐变
+//		grad.addColorStop(0, 'white');//从白
+//		grad.addColorStop(1, 'red');//到红
+//		this.myCanvas.fillStyle = grad;//设置填充渐变
+		
+		
+//		this.myCanvas.beginPath();//起始一条路径，或重置当前路径
+//		this.myCanvas.arc(50,0,30,0.1*Math.PI,0.9*Math.PI);//再画圆
+//		this.myCanvas.stroke();
+		
+		
+//		this.myCanvas.beginPath();//起始一条路径，或重置当前路径
+//		this.myCanvas.arc(50,10,28,0.6*Math.PI,0.4*Math.PI,true);//接着画圆
+//		this.myCanvas.stroke();
+		
+
 	}
 }
 
@@ -88,10 +116,10 @@ function IndexCanvas() {
 $(function() {
 	var canvas = new IndexCanvas();
 	canvas.initCanvas();
-//	canvas.paintRect();
-//	canvas.paintTriangle();
-//	canvas.paintCircle();
-//	canvas.paintGradient();
-//	canvas.paintImage();
+	//	canvas.paintRect();
+	//	canvas.paintTriangle();
+	//	canvas.paintCircle();
+	//	canvas.paintGradient();
+	//	canvas.paintImage();
 	canvas.paintApple();
 })
