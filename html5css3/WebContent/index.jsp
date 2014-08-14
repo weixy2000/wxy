@@ -8,7 +8,7 @@
 <title>HTML5 AND CSS3</title>
 </head>
 <body style="text-align: center;">
-	<canvas id="_canvas" width="960" height="500" style="border: 1px solid #c3c3c3;">
+	<canvas id="_canvas" width="960" height="600" style="border: 1px solid #c3c3c3;">
 		您的浏览器不支持Canvas。
 	</canvas>
 </body>
