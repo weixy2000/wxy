@@ -59,7 +59,7 @@ function IndexCanvas() {
 		var _this = this;
 		_this.ctx.font="20px Georgia";
 		this.myCanvas.onmousemove=function(event){
-			var cirX=this.width/2, cirY=this.height/2;
+			var cirX=this.width/2, cirY=this.height/2;// 中心位置0,0
 			// 将已写入的坐标信息清除掉
 			_this.ctx.clearRect(this.width-99-cirX,this.height-59-cirY,cirY+98,this.height+58);
 			// 存放当前鼠标位置坐标信息
@@ -178,14 +178,14 @@ function IndexCanvas() {
 		
 		// 画苹果叶子的茎
 		//开始x,开始y,结束x，结束y
-		var linear = this.ctx.createLinearGradient(1,-46,-48,-78);// 创建线性渐变
+		var linear = this.ctx.createLinearGradient(3,-50,-48,-78);// 创建线性渐变
 		linear.addColorStop(0, '#53A43B');//从深绿
 		linear.addColorStop(1, '#69B549');//到浅绿
 		
 		this.ctx.beginPath();//起始一条路径，或重置当前路径
 		this.ctx.strokeStyle=linear;
 		this.ctx.lineWidth=3;
-		this.ctx.moveTo(1,-46);
+		this.ctx.moveTo(3,-50);
 		this.ctx.lineTo(-48,-78);
 		this.ctx.stroke();
 		
@@ -196,12 +196,12 @@ function IndexCanvas() {
 $(function() {
 	var canvas = new IndexCanvas();
 	canvas.initCanvas();//初始化画布
-	canvas.initScale();//初始化标尺
-	canvas.initEvents();//初始化事件
+//	canvas.initScale();//初始化标尺
+//	canvas.initEvents();//初始化事件
 //	canvas.paintRect();//画矩形
 //	canvas.paintTriangle();//画三角形
 //	canvas.paintCircle();//画圆形
 //	canvas.paintGradient();//画渐变
 //	canvas.paintImage();//画图片
-	canvas.paintApple();//画苹果
+//	canvas.paintApple();//画苹果
 })
