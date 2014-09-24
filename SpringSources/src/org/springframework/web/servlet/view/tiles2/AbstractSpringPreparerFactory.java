@@ -20,10 +20,8 @@ import org.apache.tiles.TilesException;
 import org.apache.tiles.context.TilesRequestContext;
 import org.apache.tiles.preparer.PreparerFactory;
 import org.apache.tiles.preparer.ViewPreparer;
-import org.apache.tiles.servlet.context.ServletTilesRequestContext;
-
+import org.apache.tiles.preparer.ViewPreparerSupport;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.DispatcherServlet;
 
 /**
@@ -39,7 +37,7 @@ import org.springframework.web.servlet.DispatcherServlet;
  */
 public abstract class AbstractSpringPreparerFactory implements PreparerFactory {
 
-	public ViewPreparer getPreparer(String name, TilesRequestContext context) throws TilesException {
+	public ViewPreparer getPreparer(String name, TilesRequestContext context) {
 		WebApplicationContext webApplicationContext = (WebApplicationContext) context.getRequestScope().get(
 				DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE);
 		if (webApplicationContext == null) {
@@ -49,7 +47,17 @@ public abstract class AbstractSpringPreparerFactory implements PreparerFactory {
 				throw new IllegalStateException("No WebApplicationContext found: no ContextLoaderListener registered?");
 			}
 		}
-		return getPreparer(name, webApplicationContext);
+		
+		// 下面被注释的为源代码，由于报错，xiangyang.wei做了修改，添加了异常的捕获
+		// return getPreparer(name, webApplicationContext);
+		
+		try {
+			return getPreparer(name, webApplicationContext);
+		} catch (TilesException e) {
+			e.printStackTrace();
+		}
+		
+		return new ViewPreparerSupport();
 	}
 
 	/**

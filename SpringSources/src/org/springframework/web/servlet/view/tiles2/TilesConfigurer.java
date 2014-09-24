@@ -20,11 +20,13 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
 import javax.servlet.ServletContext;
 import javax.servlet.jsp.JspFactory;
 
@@ -53,7 +55,6 @@ import org.apache.tiles.preparer.PreparerFactory;
 import org.apache.tiles.servlet.context.ServletUtil;
 import org.apache.tiles.startup.BasicTilesInitializer;
 import org.apache.tiles.startup.TilesInitializer;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -405,7 +406,13 @@ public class TilesConfigurer implements ServletContextAware, InitializingBean, D
 					return result;
 				}
 				catch (IOException ex) {
-					throw new DefinitionsFactoryException("Cannot load definition URLs", ex);
+					//throw new DefinitionsFactoryException("Cannot load definition URLs", ex);
+					try {
+						// 源代码只有这一行代码，由于报错,xiangyang.wei添加了异常捕获
+						throw new DefinitionsFactoryException("Cannot load definition URLs", ex);
+					} catch (DefinitionsFactoryException e) {
+						return new ArrayList<URL>();
+					}
 				}
 			}
 			else {
